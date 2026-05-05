@@ -9,10 +9,7 @@
     
 </head>
 <body>
-
-    <!-- <div id="root"></div> -->
-    
-    <div class="container"> 
+    <header> 
         <nav class="header">
             <a class="header-item" href="#about">About me</a>
             <a class="header-item" href="#skills">Skills</a>
@@ -21,89 +18,194 @@
             <a class="header-item" href="#certificates">Certificates</a>
             <a class="header-item" href="#contact">Contact</a>
         </nav>
+    </header>
         
-        
+
+    <main> 
         <h1 id="name">Mohan Sai Veginati</h1>
         
         
-        <div id = "image">
-            <img src="images/mohn.jpeg" alt="image" >
-        </div>
-        
-        
-        <div>
-        
-            <section class="subheading">
-                <h2 class="title">About Me</h2>
-                <span id="summary" data-text="I am a passionate and dedicated individual with a strong interest in technology and software development. 
-I have a background in computer science and have been actively involved in various projects that have allowed
-me to develop my skills and knowledge in the field. I am always eager to learn new technologies and take on challenges 
-that help me grow both personally and professionally."></span>
-            </section>
-        
-        
-            <section class="subheading">
-                <h2 class="title">My Skills</h2><br>
-                <div class="scroll-block">
-                 
-                 <div class="slide">
+        <section id = "image"> 
+            <img src="images/me1.jpg" alt="image" >
+        </section>
+
+        <section class="subheading"> 
+            <h2 class="title">About Me</h2>
+            <p class="summary">
+             I am an aspiring Computer Science student and Full-Stack Developer with a 
+             strong foundation in Data Structures and Algorithms, driven by a passion for
+              building efficient and scalable software solutions. I have hands-on experience
+               developing real-time web applications and interactive graphical user interfaces,with a 
+               solid understanding of both front-end and back-end technologies. I focus on designing and 
+               optimizing applications that deliver seamless user experiences while maintaining performance and reliability.</p>
+             <p class="summary">Alongside development, I actively engage in competitive programming, 
+                strengthening my analytical thinking and problem-solving skills through complex algorithmic challenges.
+                 I am deeply interested in applying my technical knowledge to build impactful real-world projects,
+                  continuously learning new technologies, and striving to grow as a proficient and adaptable software developer.</p>   
+        </section>
+
+        <section class="subheading section-hidden"> 
+            <h2 class="title">My Skills</h2><br>
+            <div class="scroll-block">
+                <div class="slide">
                     <span class="label">C++</span>
                     <span class="label">JavaScript</span>
                     <span class="label">Java</span>
-                    <span class="label">Python</span>
                     <span class="label">HTML</span>
                     <span class="label">CSS</span>
                     <span class="label">React</span>
                     <span class="label">Node.js</span>
-                    <span class="label">Django</span>
-                    <span class="label">Spring Boot</span>
-                    <span class="label">Agile Methodologies</span>
                     <span class="label">Problem Solving</span>
-                    <span class="label">Team Collaboration</span>
                     <span class="label">Git</span>
                     <span class="label">MySQL</span>
-                    <span class="label">Communication Skills</span>
-                    <span class="label">Time Management</span>
-                    <span class="label">Adaptability</span>
                     <span class="label">MongoDB</span>
                     <span class="label">Critical Thinking</span>
-                    <span class="label">Leadership</span>
-                    <span class="label">Creativity</span>
-                    <span class="label">Docker</span>
-                 </div>
                 </div>
-            </section>
+            </div>
+        </section>
+        
+        <section class="subheading section-hidden"> 
+            <h2 class="title">Projects</h2>
 
-            <!-- <section class="subheading">
-                <h2 class="title">My Skills</h2>
-                <div class="orbit-container" id="orbit">
-                    <div class="center-dot"></div>
+            <div class="projects">
+                <div class="project">
+                    <h3>💬 Web-Based Real-Time Chat Application</h3>
+                    <ul>
+                        <li> Developed a real-time chat application using React.js, Node.js, Express, and Socket.io.</li>
+                        <li> Implemented persistent chat history using MongoDB with Mongoose.</li>
+                        <li> Designed a responsive UI with live updates and user presence indicators.</li>
+                    </ul>
+
+                    <div class="tech">React • Node.js • Socket.io • MongoDB</div>
+                    <div class="links">
+                        <a href="https://github.com/mohansai1732/web_chat_application" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a href="https://web-chat-application-nuc2.onrender.com/" target="_blank" rel="noopener noreferrer">Live</a>
+                    </div>
                 </div>
-            </section>
-         -->
-            <section class="subheading">
-                <h2 class="title" >Projects</h2>
-        
-            </section>
-        
-            <section class="subheading">
-                <h2 class="title">Achievements </h2>
-            
-            </section>
 
-            <section class="subheading">
-                <h2 class="title">Certificates</h2>   
+                <div class="project">
+                    <h3>✅ Task Management System</h3>
+                    <ul>
+                        <li> built a weekly task manager with full CRUD functionality using JavaScript. </li>
+                        <li> Implemented real-time progress tracking with dynamic percentage updates.</li>
+                        <li> Designed a responsive UI with CSS animations.</li>
+                    </ul>
+                    
+                    <div class="tech">HTML • CSS • JavaScript</div>
+                    <div class="links">
+                        <a href="https://github.com/mohansai1732/Task-manager" rel="noopener noreferrer">GitHub</a>
+                        <!-- <a href="#" rel="noopener noreferrer">Live</a> -->
+                    </div>
+                </div> 
+                
+                <!-- <div class="project">
+                    <h3>🚀 Portfolio Website</h3>
+                    <ul id="nxt">
+                        <li>• A personal portfolio website designed to showcase my technical skills, </li>
+                        <li>• projects, and achievements. Features a modern dark-themed UI, </li>
+                        <li>• responsive design, and smooth animations to enhance user experience.</li>
+                    </ul><br>
+                    <div class="tech">HTML • CSS • JavaScript</div>
+                    <div class="links">
+                        <a href="https://github.com/mohansai1732/PortFolio" rel="noopener noreferrer">GitHub</a>
+                        <a href="#" rel="noopener noreferrer">Live</a>
+                    </div>
+                </div>
+            </div> -->
+        </section>
+
+        <section id="achievements" class="subheading section-hidden">
+            <h2 class="title">Achievements</h2>
+
+            <div class="timeline">
+                <div class="step left">
+                    <h3>🏆 LeetCode</h3>
+                    <p>
+                        Rating: <b id="rating">0</b> 
+                        <!-- (<span id="rank-label"></span>) -->
+                    </p>
+                    <a href="https://leetcode.com/mohansai1732" target="_blank" rel="noopener noreferrer">View Profile</a>
+                </div>
+                <div class="step right">
+                    <h3>🍽️ CodeChef</h3>
+                    <p>
+                        Rating: <b id="cc-rating">0</b> |
+                        Stars: <b id="cc-stars">—</b>
+                    </p>
+                    <a href="https://www.codechef.com/users/cloud_bird_11" target="_blank" rel="noopener noreferrer">View Profile</a>
+                </div>
+                <div class="step left">
+                    <h3>📊 Smart Interviews</h3>
+                    <p>Top performer in leaderboard rankings</p>
+                    <a href="https://smartinterviews.in/profile/mohan_sai" target="_blank" rel="noopener noreferrer">View Profile</a>
+                </div>
+                <div class="step right">
+                    <h3>🎯 Smart India Hackathon</h3>
+                    <p>Selected at college level</p>
+                    <a href="images/cert6.jpg" target="_blank" rel="noopener noreferrer" class="proof-link">🖼️View Certificate</a>
+                </div>
+                <div class="step left">
+                    <h3>🔥 Consistency</h3>
+                    <p>Maintained 100 Days Coding Streak on LeetCode</p>
+                    <a href="https://leetcode.com/mohansai1732" target="_blank" rel="noopener noreferrer">
+                        View Profile
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+       <section id="certificates" class="subheading section-hidden">
+        <h2 class="title">Certificates</h2>
+
+        <div class="cert">
+            <div class="cert-track">
+                <div class="cert-img"><img src="images/cert1.jpg" alt="Certificate 1"></div>
+                <div class="cert-img"><img src="images/cert2.jpg" alt="Certificate 2"></div>
+                <div class="cert-img"><img src="images/cert3.jpg" alt="Certificate 3"></div>
+                <div class="cert-img"><img src="images/cert4.jpg" alt="Certificate 4"></div>
+                <div class="cert-img"><img src="images/cert5.jpg" alt="Certificate 5"></div>
+                <div class="cert-img"><img src="images/cert6.jpg" alt="Certificate 6"></div>
+                <div class="cert-img"><img src="images/cert7.jpg" alt="Certificate 7"></div>
+                <div class="cert-img"><img src="images/cert8.jpg" alt="Certificate 8"></div>
+                <div class="cert-img"><img src="images/cert9.jpg" alt="Certificate 9"></div>
+                <div class="cert-img"><img src="images/cert10.jpg" alt="Certificate 10"></div>
+                <div class="cert-img"><img src="images/cert11.jpg" alt="Certificate 11"></div>
+                <div class="cert-img"><img src="images/cert12.jpg" alt="Certificate 12"></div>
+                <div class="cert-img"><img src="images/cert13.jpg" alt="Certificate 13"></div>
+            </div>
+        </div>
+    </section>
+    </main>
         
-            </section>
-            <section class="subheading">
-                <h2 class="title">Contact</h2>
+
+    <footer id="contact">
+        <div class="footer-inner">
+            <h2 class="footer-title">Let's Connect</h2>
+            <div class="contact-grid">
+                <a href="tel:+919849945269" class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span>+91 98499 45269</span>
+                </a>
+                <a href="mailto:mohansai1732@gmail.com" class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span>mohansai1732@gmail.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/mohansai1732/" target="_blank" rel="noopener noreferrer" class="contact-item">
+                    <span class="contact-icon">💼</span>
+                    <span>linkedin/mohansai1732</span>  
+                </a>
+                <a href="https://github.com/mohansai1732" target="_blank" rel="noopener noreferrer" class="contact-item">
+                    <span class="contact-icon">💻</span>
+                    <span>github/mohansai1732</span>
+                </a>
+            </div>
             
-            </section>
-        
-        
+            <br>
+            <div class="footer-bottom">Built by Mohan Sai Veginati © 2026</div>
         </div>
-        </div>
+    </footer>
+        
     <script src="script.js"></script>
 </body>
 </html>
-

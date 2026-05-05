@@ -1,104 +1,148 @@
-const summary = document.getElementById("summary");
+// ===== Scroll Reveal =====
+const sections = document.querySelectorAll(".section-hidden");
 
-let typed = false;
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("section-show");
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.15 });
 
-window.addEventListener("load", () => {
-    if (!typed) {
-        typeEffect(summary, summary.dataset.text);
-        typed = true;
-    }
-});
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+sections.forEach(section => observer.observe(section));
 
 
-// async function typeEffect(element, text, speed = 30) {
-    //     element.innerHTML = "";
-    
-    //     for (let i = 0; i < text.length; i++) {
-        //         element.innerHTML += text.charAt(i);
-        //         // i++;
-        //         await sleep(speed);
-        //     }
-        // }
-        
-async function typeEffect(element, text, speed = 30) {    
-    element.innerHTML = "";
-    let i = 0;  
-    for(item of text) {
-        element.innerHTML += item;
-        await new Promise(resolve => setTimeout(resolve, speed));
-    }
-}
-
-// const section = document.querySelector(".slide");
-// const clone = section.cloneNode(true);
-// section.parentNode.appendChild(clone);
-
+// ===== Infinite Scroll (Skills) =====
 const slide = document.querySelector(".slide");
-slide.innerHTML += slide.innerHTML;
+if (slide) {
+    slide.innerHTML += slide.innerHTML;
+}
 
 
-// function typeEffect(element, text, speed = 30) {
-//     element.innerHTML = "";
-//     let i = 0;
+// ===== Infinite Scroll (Certificates) =====
+const certTrack = document.querySelector(".cert-track");
+if (certTrack) {
+    certTrack.innerHTML += certTrack.innerHTML;
+}
 
-//     typing();
-//     function typing() {
-//         if (i < text.length) {
-//             element.innerHTML += text.charAt(i);
-            // i++;
-//             setTimeout(typing, speed);
-//             // await sleep(speed);
-//         }
-//     }
+function updateUI(profileData, contestData) {
 
-// }
+    const total = profileData?.totalSolved ?? 0;
+    const easy = profileData?.easySolved ?? 0;
+    const medium = profileData?.mediumSolved ?? 0;
+    const hard = profileData?.hardSolved ?? 0;
+
+    const rating = contestData?.contestRating != null
+        ? Math.round(contestData.contestRating)
+        : "N/A";
+
+    // ✅ safe setter
+    function setText(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.innerText = value;
+    }
+
+    // ===== Safe Updates =====
+    setText("total", total);
+    setText("easy", easy);
+    setText("medium", medium);
+    setText("hard", hard);
+    setText("rating", rating);
+
+    // ===== Rank Label =====
+    let rankLabel = "Beginner";
+
+    if (rating >= 1400) rankLabel = "Intermediate";
+    if (rating >= 1600) rankLabel = "Advanced";
+    if (rating >= 1800) rankLabel = "Expert";
+    if (rating >= 2000) rankLabel = "Top Coder";
+
+    setText("rank-label", rankLabel);
+
+    // ===== Progress Bars (safe) =====
+    const sum = easy + medium + hard;
+
+    const easyBar = document.getElementById("easy-bar");
+    const mediumBar = document.getElementById("medium-bar");
+    const hardBar = document.getElementById("hard-bar");
+
+    if (sum > 0) {
+        setTimeout(() => {
+            if (easyBar) easyBar.style.width = (easy / sum) * 100 + "%";
+            if (mediumBar) mediumBar.style.width = (medium / sum) * 100 + "%";
+            if (hardBar) hardBar.style.width = (hard / sum) * 100 + "%";
+        }, 300);
+    }
+
+    // ===== Rating Circle (optional safe) =====
+    const circle = document.querySelector(".rating-circle");
+
+    if (rating !== "N/A" && circle) {
+        let percent = Math.min((rating / 2500) * 100, 100);
+
+        circle.style.background = `conic-gradient(
+            #22d3ee 0%,
+            #6366f1 ${percent}%,
+            #222 ${percent}%
+        )`;
+    }
+}
 
 
+// ===== Fetch LeetCode Data =====
+function startRealtime(username) {
+
+    async function fetchStats() {
+        try {
+            const [profileRes, contestRes] = await Promise.all([
+                fetch(`https://alfa-leetcode-api.onrender.com/userProfile/${username}`),
+                fetch(`https://alfa-leetcode-api.onrender.com/${username}/contest`)
+            ]);
+
+            const profileData = await profileRes.json();
+            const contestData = await contestRes.json();
+
+            console.log("Profile:", profileData);
+            console.log("Contest:", contestData);
+
+            updateUI(profileData, contestData);
+
+        } catch (err) {
+            console.error("API Error:", err);
+
+            // fallback UI
+            document.getElementById("rating").innerText = "Error";
+        }
+    }
+
+    fetchStats();
+
+    // refresh every 5 minutes
+    setInterval(fetchStats, 300000);
+}
 
 
+// ===== Start =====
+startRealtime("mohansai1732");
 
-// // Apply observer
-// document.querySelectorAll(".section").forEach(sec => {
-//     observer.observe(sec);
-// });
+async function fetchCodeChef() {
+  try {
+    const res = await fetch("https://twilight-limit-f43f.mohansai1732.workers.dev/");
+    const data = await res.json();
 
-// const skills = ["C++","JavaScript","Java","Python","HTML","CSS","React","Node.js","Django","Spring Boot","Agile","Problem Solving","Team Collaboration","Git","MySQL","Communication","Time Management","Adaptability","MongoDB","Critical Thinking","Leadership","Creativity","Docker"];
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.innerText = value;
+    }
 
-// const rings = [
-//   { r: 80,  count: 6, reverse: false },
-//   { r: 145, count: 8, reverse: false },
-//   { r: 185, count: 9, reverse: true  },
-// ];
+    setText("cc-rating", data.currentRating ?? "N/A");
+    setText("cc-stars", data.stars ?? "—");
+    setText("cc-highest", data.highestRating ?? "—");
 
-// const orbit = document.getElementById("orbit");
-// const cx = 190, cy = 190;
-// let idx = 0;
+  } catch (err) {
+    console.error("CodeChef Error:", err);
+  }
+}
 
-// rings.forEach(ring => {
-//   const ringEl = document.createElement("div");
-//   ringEl.className = "orbit-ring" + (ring.reverse ? " reverse" : "");
-//   const d = ring.r * 2;
-//   ringEl.style.cssText = `width:${d}px;height:${d}px;top:${cy-ring.r}px;left:${cx-ring.r}px;`;
-//   orbit.appendChild(ringEl);
-
-//   for (let i = 0; i < ring.count && idx < skills.length; i++, idx++) {
-//     const angle = (i / ring.count) * 2 * Math.PI - Math.PI / 2;
-//     const x = cx + ring.r * Math.cos(angle);
-//     const y = cy + ring.r * Math.sin(angle);
-
-//     const wrapper = document.createElement("div");
-//     wrapper.style.cssText = `position:absolute;top:${y}px;left:${x}px;`;
-//     wrapper.className = ring.reverse ? "counter-label-rev" : "counter-label";
-
-//     const label = document.createElement("span");
-//     label.className = "label";
-//     label.textContent = skills[idx];
-
-//     wrapper.appendChild(label);
-//     ringEl.appendChild(wrapper);
-//   }
-// });
+fetchCodeChef();

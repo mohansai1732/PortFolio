@@ -1,0 +1,41 @@
+export default {
+  async fetch(request) {                          // runs every time someone visits the URL
+    try {
+      const res = await fetch("https://www.codechef.com/users/cloud_bird_11", {
+        headers: {
+          "User-Agent": "Mozilla/5.0 ..."         // pretend to be a browser (codechef blocks bots)
+        }
+      });
+
+      const html = await res.text();              // get the full HTML of your codechef profile page
+
+      const highestMatch = html.match(/Highest Rating (\d+)/);  // find "Highest Rating 1476" in HTML
+      const highestRating = highestMatch ? highestMatch[1] : "N/A";  // extract just "1476"
+      const currentRating = highestRating;        // use same number for current rating
+
+      const rating = parseInt(currentRating);     // convert "1476" string → 1476 number
+      const stars = rating < 1400 ? "1★" :        // calculate stars based on rating range
+                    rating < 1600 ? "2★" :
+                    rating < 1800 ? "3★" :
+                    rating < 2000 ? "4★" :
+                    rating < 2200 ? "5★" :
+                    rating < 2500 ? "6★" : "7★";
+
+      return new Response(
+        JSON.stringify({ currentRating, stars, highestRating }),  // send JSON back to your portfolio
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",   // allow any website to call this worker
+            "Content-Type": "application/json",   // tell browser it's JSON
+            "Cache-Control": "no-cache"           // always fetch fresh, never use cached data
+          }
+        }
+      );
+
+    } catch (err) {
+      return new Response(JSON.stringify({ error: err.message }));  // if anything fails, return error
+    }
+  }
+};
+
+https://twilight-limit-f43f.mohansai1732.workers.dev/
